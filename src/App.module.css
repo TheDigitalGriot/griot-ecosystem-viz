@@ -1,0 +1,64 @@
+.app {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 48px 64px;
+  border-top: 1px solid var(--rim-08);
+  margin-top: 80px;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerLine {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footerMark {
+  font-size: 16px;
+  color: #3b82f6;
+  text-shadow: 0 0 16px #3b82f6, 0 0 32px rgba(59, 130, 246, 0.4);
+}
+
+.footerBrand {
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--voice);
+}
+
+.footerMeta {
+  font-size: 12px;
+  color: var(--whisper);
+}
+
+.footerMeta code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--footstep);
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--rim-08);
+  border-radius: var(--r-sm);
+}
+
+.footerDate {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--footstep);
+}

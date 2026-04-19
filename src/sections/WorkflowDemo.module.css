@@ -1,0 +1,228 @@
+.demoContainer {
+  position: relative;
+  padding: 32px;
+  background: var(--haze-02);
+  border: 1px solid var(--rim-08);
+  border-radius: var(--r-3xl);
+  backdrop-filter: var(--blur-card);
+  -webkit-backdrop-filter: var(--blur-card);
+  overflow: hidden;
+}
+
+.demoContainer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at top right,
+    rgba(59, 130, 246, 0.06) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* ───── Status bar ───── */
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 14px 10px 22px;
+  margin-bottom: 24px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--rim-08);
+  border-radius: var(--r-pill);
+  position: relative;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.statusGroup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 180px;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  transition: all 400ms var(--tale);
+}
+
+.statusDot[data-phase="idle"] {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.statusDot[data-phase="typing"] {
+  background: #3b82f6;
+  box-shadow: 0 0 12px #3b82f6, 0 0 24px rgba(59, 130, 246, 0.5);
+  animation: statusPulse 1s var(--pulse-e) infinite;
+}
+
+.statusDot[data-phase="ideate"] {
+  background: #f97316;
+  box-shadow: 0 0 12px #f97316, 0 0 24px rgba(249, 115, 22, 0.5);
+  animation: statusPulse 1s var(--pulse-e) infinite;
+}
+
+.statusDot[data-phase="research"],
+.statusDot[data-phase="plan"],
+.statusDot[data-phase="implement"],
+.statusDot[data-phase="validate"] {
+  background: #3b82f6;
+  box-shadow: 0 0 12px #3b82f6, 0 0 24px rgba(59, 130, 246, 0.5);
+  animation: statusPulse 1s var(--pulse-e) infinite;
+}
+
+.statusDot[data-phase="ship"] {
+  background: #10b985;
+  box-shadow: 0 0 12px #10b985, 0 0 24px rgba(16, 185, 133, 0.5);
+  animation: statusPulse 1s var(--pulse-e) infinite;
+}
+
+.statusDot[data-phase="complete"] {
+  background: #10b985;
+  box-shadow: 0 0 18px #10b985, 0 0 36px rgba(16, 185, 133, 0.5);
+}
+
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.92);
+  }
+}
+
+.statusLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--voice);
+  font-weight: 500;
+}
+
+/* (Step indicator replaced by WorkflowNavBar component) */
+
+/* ───── Restart button ───── */
+.restartBtn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--rim-15);
+  color: var(--whisper);
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: all 300ms var(--tale);
+}
+
+.restartBtn:hover {
+  color: var(--voice);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ───── Split layout ───── */
+.splitLayout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.leftPane,
+.rightPane {
+  display: flex;
+  flex-direction: column;
+}
+
+.paneLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 4px 12px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--whisper);
+}
+
+.paneDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3b82f6;
+  box-shadow: 0 0 8px #3b82f6;
+}
+
+.paneDotCyan {
+  background: #22d3ee;
+  box-shadow: 0 0 8px #22d3ee;
+}
+
+.paneFrame {
+  position: relative;
+  flex: 1;
+  min-height: 560px;
+  display: flex;
+}
+
+.paneFrame > * {
+  flex: 1;
+}
+
+/* ───── Footer note ───── */
+.footer {
+  padding: 18px 24px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--rim-08);
+  border-radius: var(--r-xl);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.footerNote {
+  font-size: 12px;
+  color: var(--whisper);
+  line-height: 1.65;
+  font-style: italic;
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
+  .splitLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .statusBar {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--r-xl);
+    justify-content: center;
+  }
+
+  .statusGroup {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .demoContainer {
+    padding: 20px;
+  }
+  .paneFrame {
+    min-height: 480px;
+  }
+}

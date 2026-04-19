@@ -1,0 +1,165 @@
+/*
+ * Perspective-tilted stage. Three concentric rings orbit on a
+ * common horizontal axis, giving the effect of a record laid flat
+ * into the scene. Matches the waitlist-hero layered spinning pattern.
+ */
+
+.stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  perspective: 1600px;
+  transform: perspective(1600px) rotateX(22deg);
+  transform-origin: center 60%;
+  overflow: hidden;
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  will-change: transform;
+  transform: translate(-50%, -50%) rotate(var(--start));
+}
+
+.spinCw {
+  animation: orbitCw var(--duration) linear infinite;
+}
+
+.spinCcw {
+  animation: orbitCcw var(--duration) linear infinite;
+}
+
+@keyframes orbitCw {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--start));
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--start) + 360deg));
+  }
+}
+
+@keyframes orbitCcw {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--start));
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--start) - 360deg));
+  }
+}
+
+/* Each glyph is positioned at (radius, 0) relative to the ring center,
+   then translated by -50% so it centers on its orbital point. */
+.glyphWrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: var(--size);
+  transform: rotate(var(--angle)) translateX(var(--radius))
+    translate(-50%, -50%);
+  transform-origin: 0 0;
+}
+
+.glyphTile {
+  --ember: 59, 130, 246;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 28%;
+  background: radial-gradient(
+    ellipse at 32% 18%,
+    rgba(var(--ember), 0.35) 0%,
+    rgba(var(--ember), 0.12) 35%,
+    rgba(0, 0, 0, 0.6) 80%
+  );
+  border: 1px solid rgba(var(--ember), 0.4);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.12) inset,
+    0 0 32px 0 rgba(var(--ember), 0.35),
+    0 0 80px 0 rgba(var(--ember), 0.2),
+    0 30px 60px -20px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.glyphTile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    transparent 30%
+  );
+  pointer-events: none;
+}
+
+.glyphTile::after {
+  content: '';
+  position: absolute;
+  inset: 14%;
+  border-radius: 20%;
+  border: 1px solid rgba(var(--ember), 0.14);
+  pointer-events: none;
+}
+
+.glyphGrid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 12% 12%;
+  opacity: 0.45;
+  border-radius: inherit;
+}
+
+.glyphChar {
+  position: relative;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 62%;
+  font-style: italic;
+  font-weight: 400;
+  color: rgb(var(--ember));
+  text-shadow: 0 0 24px rgba(var(--ember), 0.9),
+    0 0 48px rgba(var(--ember), 0.5),
+    0 0 96px rgba(var(--ember), 0.25);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-top: -0.08em;
+}
+
+.glyphCorner {
+  position: absolute;
+  bottom: 8%;
+  right: 10%;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10%;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.35);
+  padding: 3% 6%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18%;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+@media (max-width: 1024px) {
+  .stage {
+    transform: perspective(1600px) rotateX(18deg);
+  }
+}

@@ -1,0 +1,297 @@
+.hubCard {
+  background: var(--haze-04);
+  border: 1px solid var(--rim-08);
+  border-radius: var(--r-3xl);
+  backdrop-filter: var(--blur-frost);
+  -webkit-backdrop-filter: var(--blur-frost);
+  overflow: hidden;
+  box-shadow: var(--depth-card);
+  cursor: pointer;
+  position: relative;
+  transition: background 400ms var(--tale), border-color 400ms var(--tale),
+    box-shadow 400ms var(--tale), transform 400ms var(--tale);
+}
+
+.hubCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 30%
+  );
+}
+
+.hubCard:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-3px);
+  border-color: rgba(var(--ember), 0.4);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
+    0 0 24px 0 rgba(var(--ember), 0.22),
+    0 0 60px 0 rgba(var(--ember), 0.1),
+    0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.selected {
+  border-color: rgba(var(--ember), 0.65);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
+    0 0 0 1px rgba(var(--ember), 0.4),
+    0 0 36px 0 rgba(var(--ember), 0.3),
+    0 0 80px 0 rgba(var(--ember), 0.15);
+}
+
+/* Thumbnail */
+.thumb {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(var(--ember), 0.3) 0%,
+    var(--ash) 70%
+  );
+}
+
+.gridBg {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 30%,
+    rgba(0, 0, 0, 0.4) 90%
+  );
+  opacity: 0;
+  transition: opacity 500ms var(--tale);
+}
+
+.hubCard:hover .thumb::after {
+  opacity: 1;
+}
+
+.glyph {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: rgb(var(--ember));
+  text-shadow: 0 0 40px currentColor;
+  transition: color 500ms var(--tale), text-shadow 500ms var(--tale);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.hubCard:hover .glyph {
+  color: rgba(255, 255, 255, 0.96);
+  text-shadow: 0 0 12px rgba(var(--ember), 0.95),
+    0 0 32px rgba(var(--ember), 0.65),
+    0 0 80px rgba(var(--ember), 0.4);
+}
+
+.badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  color: var(--echo);
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.hasUpdate .badge {
+  background: rgba(var(--ember), 0.2);
+  color: rgb(var(--ember));
+  border-color: rgba(var(--ember), 0.45);
+  box-shadow: 0 0 16px 0 rgba(var(--ember), 0.3);
+}
+
+/* Body */
+.body {
+  padding: 18px 22px 22px;
+  position: relative;
+}
+
+.body > *:not(.bloom) {
+  position: relative;
+  z-index: 1;
+}
+
+.name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--voice);
+  margin-bottom: 4px;
+}
+
+.desc {
+  font-size: 12px;
+  color: var(--whisper);
+  line-height: 1.55;
+  margin-bottom: 10px;
+  min-height: 36px;
+}
+
+.stack {
+  font-size: 10px;
+  color: var(--footstep);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 14px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--rim-08);
+  border-radius: var(--r-md);
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ver {
+  font-size: 10px;
+  color: var(--footstep);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.status {
+  font-size: 10px;
+  color: rgb(var(--ember));
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border: 1px solid rgba(var(--ember), 0.4);
+  border-radius: var(--r-pill);
+  background: rgba(var(--ember), 0.08);
+}
+
+/* Bloom */
+.bloom {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 800ms var(--tale);
+}
+
+.hubCard:hover .bloom,
+.selected .bloom {
+  opacity: 1;
+}
+
+.bloomCore {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 240px;
+  height: 240px;
+  margin-left: -120px;
+  margin-top: -120px;
+  background: radial-gradient(
+    circle,
+    rgba(var(--ember), 0.55) 0%,
+    rgba(var(--ember), 0.28) 25%,
+    rgba(var(--ember), 0.08) 55%,
+    transparent 80%
+  );
+  filter: blur(28px);
+  border-radius: 58% 42% 52% 48% / 48% 56% 44% 52%;
+  animation: bloomMorph 11s var(--pulse-e) infinite;
+  will-change: transform, border-radius;
+}
+
+@keyframes bloomMorph {
+  0%,
+  100% {
+    border-radius: 58% 42% 52% 48% / 48% 56% 44% 52%;
+  }
+  20% {
+    border-radius: 46% 54% 60% 40% / 52% 44% 56% 48%;
+  }
+  40% {
+    border-radius: 62% 38% 44% 56% / 40% 60% 40% 60%;
+  }
+  60% {
+    border-radius: 40% 60% 50% 50% / 56% 40% 60% 44%;
+  }
+  80% {
+    border-radius: 54% 46% 58% 42% / 44% 52% 48% 56%;
+  }
+}
+
+.bloomRipple {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--ember), 0.7) 0%,
+    rgba(var(--ember), 0.3) 40%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  transform: scale(0.2);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bloomRippleFiring {
+  animation: bloomRipple 900ms var(--drum);
+}
+
+@keyframes bloomRipple {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(6);
+    opacity: 0;
+  }
+}

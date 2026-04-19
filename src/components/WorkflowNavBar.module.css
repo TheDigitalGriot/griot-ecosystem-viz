@@ -1,0 +1,146 @@
+/* ===================================================================
+   WorkflowNavBar — adapted from griotwave bottom-nav-bar
+   Display-only phase indicator with expanding active pill
+   =================================================================== */
+
+.navBar {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 5px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--r-pill);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 0 rgba(255, 255, 255, 0.02) inset,
+    0 8px 32px -12px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+/* ───── Item (collapsed icon-only by default) ───── */
+.item {
+  --ember: 255, 255, 255;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: var(--r-pill);
+  color: rgba(255, 255, 255, 0.35);
+  cursor: default;
+  position: relative;
+  transition: background 450ms var(--song),
+    color 450ms var(--song),
+    box-shadow 450ms var(--song),
+    min-width 450ms var(--song),
+    padding 450ms var(--song);
+}
+
+/* ───── States ───── */
+
+.state-pending {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.state-complete {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.state-active {
+  background: rgba(var(--ember), 0.14);
+  color: rgb(var(--ember));
+  padding: 0 14px 0 12px;
+  box-shadow: 0 0 20px rgba(var(--ember), 0.35),
+    0 0 40px rgba(var(--ember), 0.15),
+    0 1px 0 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+/* ───── Glyph ───── */
+.glyph {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1;
+  transition: text-shadow 400ms var(--tale),
+    transform 450ms var(--song);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.state-complete .glyph {
+  text-shadow: 0 0 6px rgba(var(--ember), 0.25);
+}
+
+.state-active .glyph {
+  text-shadow: 0 0 14px rgba(var(--ember), 0.9),
+    0 0 28px rgba(var(--ember), 0.45),
+    0 0 56px rgba(var(--ember), 0.2);
+  transform: scale(1.08);
+}
+
+/* ───── Expanding label (the mechanism) ───── */
+.labelWrap {
+  display: inline-flex;
+  align-items: center;
+  max-width: 0;
+  margin-left: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-width 500ms var(--song),
+    margin-left 500ms var(--song),
+    opacity 280ms var(--tale);
+}
+
+.state-active .labelWrap {
+  max-width: 120px;
+  margin-left: 10px;
+  opacity: 1;
+}
+
+.labelText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  white-space: nowrap;
+  color: inherit;
+}
+
+/* ───── Small tweaks at smaller viewports ───── */
+@media (max-width: 640px) {
+  .navBar {
+    height: 44px;
+    padding: 4px;
+  }
+
+  .item {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+  }
+
+  .glyph {
+    font-size: 16px;
+  }
+
+  .state-active {
+    padding: 0 12px 0 10px;
+  }
+
+  .state-active .labelWrap {
+    max-width: 90px;
+    margin-left: 8px;
+  }
+
+  .labelText {
+    font-size: 10px;
+  }
+}
