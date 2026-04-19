@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/griot-ecosystem-viz/' : '/',
   plugins: [react()],
   resolve: {
     alias: {
@@ -16,4 +17,4 @@ export default defineConfig({
     port: 5174,
     strictPort: false,
   },
-});
+}));
