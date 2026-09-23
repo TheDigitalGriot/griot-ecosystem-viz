@@ -210,7 +210,7 @@ export const TOOLS: Tool[] = [
     stack: 'remotion + node',
     version: 'v1.2',
     status: 'active',
-    location: 'Developer/lucid-ai-gen/',
+    location: 'GriotApps/lucid-ai-gen/',
   },
   {
     id: 'griotwave',
