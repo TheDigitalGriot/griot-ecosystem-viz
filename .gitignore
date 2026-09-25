@@ -72,7 +72,7 @@ $RECYCLE.BIN/
 .claude/settings.local.json
 # .prism/local/
 # .prism/shared/
-.prism/
+.prism/local/
 CLAUDE.local.md
 
 # Misc
